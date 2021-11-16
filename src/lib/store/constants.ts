@@ -1,13 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { twitter_api } from '../default';
 import type { ConstantsState } from '../types';
 
 const initialState: ConstantsState = {
   bearer_token: undefined,
-  hostname: 'api.twitter.com',
-  heartbeatInterval: 20000,
-  path: {
-    stream_sample_tweets: '/2/tweets/sample/stream',
-  },
+  ...twitter_api,
 };
 
 export const constantsSlice = createSlice({
