@@ -20,7 +20,7 @@ import { Data } from './types';
     if (tweet.created_at) {
       console.log(tweet.created_at);
     } else {
-      throw new Error('no date in tweet')
+      throw new Error('no date in tweet');
     }
   };
   tweets(options, callback);

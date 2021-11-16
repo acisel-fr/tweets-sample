@@ -12,11 +12,16 @@ export default function (options: Options, callback: (arg0: Data) => void) {
     };
     if (status === 200) {
       // Start connection
-      let current = 0, last = 0;
+      let current = 0,
+        last = 0;
       setInterval(() => {
         // warn if empty connection
         if (current === last) {
-          throw new Error(`No data or heartbeat during ${store.getState().constants.heartbeatInterval} ms`);
+          throw new Error(
+            `No data or heartbeat during ${
+              store.getState().constants.heartbeatInterval
+            } ms`
+          );
         } else {
           last = current;
         }
@@ -26,7 +31,7 @@ export default function (options: Options, callback: (arg0: Data) => void) {
       let data: string = '';
       response.on('data', (chunk: string) => {
         ++current;
-        console.log(current, last)
+        console.log(current, last);
         data += chunk;
         if (!data.match(/[\r\n]$/)) {
           // data uncomplete
@@ -44,7 +49,7 @@ export default function (options: Options, callback: (arg0: Data) => void) {
             // Malformed JSON
             throw error;
           }
-        } else if ((data.match(/^[\n\r]+$/))) {
+        } else if (data.match(/^[\n\r]+$/)) {
           // Heartbeat
         } else {
           // Unknown
