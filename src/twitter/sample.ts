@@ -6,8 +6,9 @@ export default function (options: Options, callback: (arg0: Data) => void) {
   get(options, response => {
     const status = response.statusCode;
     const rateLimit = {
+      status: status,
       limit: response.headers['x-rate-limit-limit'],
-      remaining: response.headers['x-rate-limit-remaining'],
+      remain: response.headers['x-rate-limit-remaining'],
       reset: response.headers['x-rate-limit-reset'],
     };
     if (status === 200) {
@@ -32,28 +33,27 @@ export default function (options: Options, callback: (arg0: Data) => void) {
       response.on('data', (chunk: string) => {
         ++current;
         console.log(current, last);
+        // Heartbeat
+        if (chunk.match(/^[\n\r]*$/)) return;
         data += chunk;
-        if (!data.match(/[\r\n]$/)) {
-          // data uncomplete
-        } else if (data.match(/^[\r\n]*\{.+\}[\r\n]+$/)) {
-          // looks like a JSON
-          try {
-            const json: DataResponse = JSON.parse(data);
-            data = '';
-            if (json.data) {
-              callback(json.data);
-            } else {
-              throw new Error(`No data sent: ${json}`);
-            }
-          } catch (error) {
-            // Malformed JSON
-            throw error;
+        // Part of data only. Wait for the completion
+        if (!data.match(/[\r\n]$/)) return;
+        // Data complete
+        try {
+          // should be a JSON
+          const json: DataResponse = JSON.parse(data);
+          data = '';
+          if (json.data) {
+            callback(json.data);
+          } else {
+            // Not an awaited type
+            const type = JSON.stringify(json);
+            throw new Error(`Another type of data has been sent: ${type}`);
           }
-        } else if (data.match(/^[\n\r]+$/)) {
-          // Heartbeat
-        } else {
-          // Unknown
-          throw new Error(`Twitter sends: |${data}|`);
+        } catch (error) {
+          // Not a JSON format
+          const format = JSON.stringify(data);
+          throw new Error(`Bad format: |${format}|`);
         }
       });
       response.on('end', () => {
