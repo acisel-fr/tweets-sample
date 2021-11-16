@@ -14,19 +14,18 @@ export default function (options: Options, callback: (arg0: Data) => void) {
     if (status === 200) {
       // Start connection
       let current = 0,
-        last = 0;
+        last = 0,
+        heartbeat = store.getState().constants.heartbeatInterval;
       setInterval(() => {
         // warn if empty connection
         if (current === last) {
           throw new Error(
-            `No data or heartbeat during ${
-              store.getState().constants.heartbeatInterval
-            } ms`
+            `No data or heartbeat during ${heartbeat} ms. Ticks ${last}/${current}`
           );
         } else {
           last = current;
         }
-      }, store.getState().constants.heartbeatInterval);
+      }, heartbeat);
       // Authentication and query succeed
       response.setEncoding('utf8');
       let data: string = '';
