@@ -1,2 +1,1 @@
-# sample-rates
-Rates of Twitter
+# Twitter API crawler
