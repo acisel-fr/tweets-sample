@@ -1,6 +1,15 @@
 {
   "name": "@acisel-fr/tweets-sample",
   "version": "0.0.1",
+  "description": "Pull 1 over 100 tweets in real time",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/acisel-fr/tweets-sample.git"
+  },
+  "bugs": {
+    "url": "https://github.com/acisel-fr/tweets-sample/issues"
+  },
+  "homepage": "https://github.com/acisel-fr/tweets-sample#readme",
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node build/bin/index.js",
