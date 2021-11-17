@@ -1,0 +1,10 @@
+.env
+/src
+.DS_Store
+.vscode
+.env
+.nvmrc
+.zenodo.json
+tsconfig.json
+*.tgz
+.eslintrc.yml

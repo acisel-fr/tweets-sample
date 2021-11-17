@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { setup, Data, query, tweets } from '../lib';
 
 (function () {
