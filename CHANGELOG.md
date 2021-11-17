@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com/acisel-fr/tweets-sample/compare/v0.0.2...v0.0.3) (2021-11-17)
+
+
+### Bug Fixes
+
+* d.ts ([aebcef9](https://github.com/acisel-fr/tweets-sample/commit/aebcef9fe7d1977e52f4e077986f10b3773a7a65))
+
 ### [0.0.2](https://github.com/acisel-fr/tweets-sample/compare/v0.0.1...v0.0.2) (2021-11-17)
 
 
