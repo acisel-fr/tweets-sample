@@ -1,10 +1,11 @@
 import store from '../store';
 
-export default function () {
+export default function (fields?: string[]) {
   const hostname = store.getState().constants.hostname;
-  const path =
-    store.getState().constants.path.stream_sample_tweets +
-    '?tweet.fields=created_at';
+  let path = store.getState().constants.path.stream_sample_tweets;
+  if (fields && fields.length > 0) {
+    path += '?tweet.fields=' + fields.join(',');
+  }
   const bearer = store.getState().constants.bearer_token;
   const options = {
     hostname: hostname,
