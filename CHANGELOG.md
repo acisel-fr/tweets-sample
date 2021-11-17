@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2](https://github.com/acisel-fr/tweets-sample/compare/v0.0.1...v0.0.2) (2021-11-17)
+
+
+### Bug Fixes
+
+* module import ([a45b8f1](https://github.com/acisel-fr/tweets-sample/commit/a45b8f12a8d3bfe5c7b16fb656172d3b6382129f))
+* npm install ([6b37e22](https://github.com/acisel-fr/tweets-sample/commit/6b37e22be6b97886dc3273131c37fc3c9c80dd81))
+* remove sourcemap from publication ([cd3c97a](https://github.com/acisel-fr/tweets-sample/commit/cd3c97a4e538672eae993b6325f40a957181cde4))
+
+
+### Administration
+
+* add vscode parameters ([46329ba](https://github.com/acisel-fr/tweets-sample/commit/46329ba777dcc8cf9268d9a4fbbfdff7a28bc004))
+* remove console.log ([972211d](https://github.com/acisel-fr/tweets-sample/commit/972211d60f1d24c45397429bcf2479e750ba5fce))
+
+
+### Documentation
+
+* add license ([05c37eb](https://github.com/acisel-fr/tweets-sample/commit/05c37eb39726036909c54d1815fba125449be3fe))
+* add npm owner ([3483f65](https://github.com/acisel-fr/tweets-sample/commit/3483f653df1ce93aeb3b0c9f6ce4e35d807f451f))
+* Add zenodo badge ([ade7301](https://github.com/acisel-fr/tweets-sample/commit/ade7301a0c9ee4174f22f912b7a69efd7fa21858))
+* fix ([0f429da](https://github.com/acisel-fr/tweets-sample/commit/0f429dae2efc1b0bc5319dfa8ec3905b7770966d))
+* fix publication date ([7af6140](https://github.com/acisel-fr/tweets-sample/commit/7af6140e4b1233015046881ac55ee62ec2dbc9f3))
+
 ### 0.0.1 (2021-11-17)
 
 ### Features
