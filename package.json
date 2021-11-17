@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "scripts": {
     "build": "tsc",
-    "start": "npm run build && node build/main.js",
+    "start": "npm run build && node build/bin/index.js",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
   "devDependencies": {
+    "@tsconfig/node16": "^1.0.2",
     "@types/node": "^16.11.7",
     "@typescript-eslint/eslint-plugin": "^5.4.0",
     "@typescript-eslint/parser": "^5.4.0",

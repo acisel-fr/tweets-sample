@@ -10,5 +10,9 @@ import { setup, Data, query, tweets } from '../lib';
     }
   };
   const options = query();
-  tweets(options, callback);
+  try {
+    tweets(options, callback);
+  } catch (error) {
+    console.error(error);
+  }
 })();
