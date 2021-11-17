@@ -1,0 +1,14 @@
+{
+  "publication_date": "2021-11-17",
+  "upload_type": "software",
+  "title": "tweets-sample",
+  "description": "Pull 1 over 100 tweets in real time",
+  "creators": [
+    {
+      "orcid": "0000-0002-0177-0387",
+      "name": "Chasset, Pierre-Olivier"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open"
+}
