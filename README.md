@@ -4,6 +4,8 @@
 
 Missing features
 
+- [ ] npm registry
+- [ ] github registry
 - [ ] cli
 - [ ] demo
 - [ ] docs
