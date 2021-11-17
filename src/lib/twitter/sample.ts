@@ -31,7 +31,6 @@ export default function (options: Options, callback: (arg0: Data) => void) {
       let data: string = '';
       response.on('data', (chunk: string) => {
         ++current;
-        console.log(current, last);
         // Heartbeat
         if (chunk.match(/^[\n\r]*$/)) return;
         data += chunk;
