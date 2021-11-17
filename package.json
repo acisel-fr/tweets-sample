@@ -10,6 +10,9 @@
     "url": "https://github.com/acisel-fr/tweets-sample/issues"
   },
   "homepage": "https://github.com/acisel-fr/tweets-sample#readme",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "build": "tsc",
     "start": "npm run build && node build/bin/index.js",
