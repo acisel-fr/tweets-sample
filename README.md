@@ -12,3 +12,17 @@ Missing features
 - [ ] i18n
 - [ ] a11y
 - [ ] perf
+
+```ts
+import { setup, query, tweets } from '../lib';
+
+(function () {
+  try {
+    setup();
+    const options = query(['created_at']);
+    tweets(options, data => console.log(data));
+  } catch (error) {
+    console.error(error);
+  }
+})();
+```

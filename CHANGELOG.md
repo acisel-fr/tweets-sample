@@ -4,21 +4,19 @@ All notable changes to this project will be documented in this file. See [standa
 
 ## [0.1.0](https://github.com/acisel-fr/tweets-sample/compare/v0.0.3...v0.1.0) (2021-11-17)
 
-
 ### ⚠ BREAKING CHANGES
 
-* **api:** Function query with tweet fields parameters
-* query
+- **api:** Function query with tweet fields parameters
+- query
 
 ### Features
 
-* **api:** Function query with tweet fields parameters ([f2fcff1](https://github.com/acisel-fr/tweets-sample/commit/f2fcff10a6fc71ad420e9f697ccafed2f3a14dac))
-* query ([64d7df7](https://github.com/acisel-fr/tweets-sample/commit/64d7df7565ebebc477f403a6845109e52541ff51))
-
+- **api:** Function query with tweet fields parameters ([f2fcff1](https://github.com/acisel-fr/tweets-sample/commit/f2fcff10a6fc71ad420e9f697ccafed2f3a14dac))
+- query ([64d7df7](https://github.com/acisel-fr/tweets-sample/commit/64d7df7565ebebc477f403a6845109e52541ff51))
 
 ### Styles
 
-* prettier ([ffb8c48](https://github.com/acisel-fr/tweets-sample/commit/ffb8c48603929cddbb696ed22272176dc4871344))
+- prettier ([ffb8c48](https://github.com/acisel-fr/tweets-sample/commit/ffb8c48603929cddbb696ed22272176dc4871344))
 
 ### [0.0.3](https://github.com/acisel-fr/tweets-sample/compare/v0.0.2...v0.0.3) (2021-11-17)
 
