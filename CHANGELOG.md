@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.2.0](https://github.com/acisel-fr/tweets-sample/compare/v0.1.0...v0.2.0) (2021-11-21)
+
+
+### ⚠ BREAKING CHANGES
+
+* All errors and data exported via Event
+* a class is now exported
+* Remove bin entry
+
+### Features
+
+* a class is now exported ([31fc545](https://github.com/acisel-fr/tweets-sample/commit/31fc545f855194c8020818f6f35c7f3849372e91))
+* All errors and data exported via Event ([2879704](https://github.com/acisel-fr/tweets-sample/commit/2879704be48ba48879a0d86358f61c03f8261efb))
+* Log data to console ([a080e5e](https://github.com/acisel-fr/tweets-sample/commit/a080e5e51a2b9452bdfc81aeaa7e2570f6645674))
+* Remove bin entry ([168609c](https://github.com/acisel-fr/tweets-sample/commit/168609c974cd751f9d2f02bb2b26c1f3fb432c32))
+
+
+### Code refactoring
+
+* signals ([19f6e5b](https://github.com/acisel-fr/tweets-sample/commit/19f6e5bce87e0a4ebf128b1b1d514b81ff21e66f))
+* src folder ([6659444](https://github.com/acisel-fr/tweets-sample/commit/66594446bb0fbbc9a5a997918d0bf44b76618940))
+
 ## [0.1.0](https://github.com/acisel-fr/tweets-sample/compare/v0.0.3...v0.1.0) (2021-11-17)
 
 ### ⚠ BREAKING CHANGES
