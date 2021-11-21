@@ -15,6 +15,7 @@ import {
   DATA,
   OK_STATUS,
   CONN_ACTIVE,
+  signal,
 } from './constants/signals';
 export default class {
   token: string;
@@ -22,6 +23,7 @@ export default class {
   fields: string[] | undefined;
   emitter: EventEmitter;
   events: any[];
+  signal: (sign: string, data?: object | undefined) => void;
 
   constructor(
     token: string,
@@ -32,6 +34,7 @@ export default class {
     this.fields = fields;
     this.callback = callback;
     this.emitter = new EventEmitter();
+    this.signal = signal(this.emitter);
     this.events = [
       CONNECTED,
       CONNECTING,
@@ -52,6 +55,6 @@ export default class {
   stream() {
     const options = query(this.token, this.fields);
 
-    tweets(options, this.emitter);
+    tweets(options, this.signal);
   }
 }

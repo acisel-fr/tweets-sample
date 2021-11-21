@@ -8,11 +8,15 @@ if (!token) throw new Error('No token provided');
 const callback = (data: object) => console.log(data);
 
 const tweets = new Tweets(token, callback, ['created_at']);
-tweets.events
-  .filter(event => event !== 'DATA')
-  .forEach(event => {
-    tweets.emitter.on(event, data => {
-      console.log(event, data);
-    });
-  });
+
+tweets.emitter.on('info', obj => {
+  console.log(obj);
+});
+tweets.emitter.on('warn', obj => {
+  console.log(obj);
+});
+tweets.emitter.on('error', obj => {
+  console.log(obj);
+});
+
 tweets.stream();

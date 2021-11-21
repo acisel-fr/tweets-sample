@@ -1,5 +1,4 @@
 import { get } from 'https';
-import type EventEmitter from 'events';
 import { twitter } from '../constants/twitter';
 import { Options } from './query';
 import {
@@ -18,15 +17,19 @@ import {
   CONN_ACTIVE,
 } from '../constants/signals';
 import type { IncomingMessage } from 'http';
+import { DateTime } from 'luxon';
 
-export default function (options: Options, signal: EventEmitter) {
-  signal.emit(CONNECTING);
+export default function (
+  options: Options,
+  signal: (sign: string, data?: any) => void
+) {
+  signal(CONNECTING);
   get(options, response => {
-    signal.emit(CONNECTED);
-    signal.emit(RATE_LIMITS, ratesSelector(response));
+    signal(CONNECTED);
+    signal(RATE_LIMITS, ratesSelector(response));
     const status = response.statusCode;
     if (status === 200) {
-      signal.emit(OK_STATUS);
+      signal(OK_STATUS);
 
       /** Watch if connection get inactive */
       const heartbeat = twitter.heartbeatInterval;
@@ -34,9 +37,9 @@ export default function (options: Options, signal: EventEmitter) {
       let last = 0;
       setInterval(() => {
         if (current === last) {
-          signal.emit(CONN_INACTIVE);
+          signal(CONN_INACTIVE);
         } else {
-          signal.emit(CONN_ACTIVE);
+          signal(CONN_ACTIVE);
           last = current;
         }
       }, heartbeat);
@@ -46,40 +49,42 @@ export default function (options: Options, signal: EventEmitter) {
       response.setEncoding('utf8');
       response.on('data', (chunk: string) => {
         ++current;
-        if (chunk.match(/^[\n\r]*$/)) return signal.emit(HEARTBEAT);
+        if (chunk.match(/^[\n\r]*$/)) return signal(HEARTBEAT);
         data += chunk;
-        if (!data.match(/[\r\n]$/)) return signal.emit(CHUNK);
+        if (!data.match(/[\r\n]$/)) return signal(CHUNK);
         try {
           // should be a JSON
           const json: DataResponse = JSON.parse(data);
           data = '';
           if (json.data) {
-            signal.emit(DATA, json.data);
+            signal(DATA, json.data);
           } else {
             const type = JSON.stringify(json);
-            signal.emit(NOT_TWEET, type);
+            signal(NOT_TWEET, type);
           }
         } catch (error) {
           const format = JSON.stringify(data);
-          signal.emit(NOT_JSON, format);
+          signal(NOT_JSON, format);
         }
       });
 
       response.on('end', () => {
-        signal.emit(CONN_END);
+        signal(CONN_END);
       });
     } else {
-      signal.emit(WRONG_STATUS, status, response);
+      signal(WRONG_STATUS, { status, response });
     }
   });
 }
 
 function ratesSelector(res: IncomingMessage) {
   const head = res.headers;
+  const reset = head['x-rate-limit-reset'] as string;
+  const date = DateTime.fromMillis(parseInt(reset) * 1000).toISO();
   return {
     limit: head['x-rate-limit-limit'],
     remain: head['x-rate-limit-remaining'],
-    reset: head['x-rate-limit-reset'],
+    reset: date,
   };
 }
 
