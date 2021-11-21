@@ -19,20 +19,14 @@ import {
 } from './constants/signals';
 export default class {
   token: string;
-  callback: (data: object) => void;
   fields: string[] | undefined;
   emitter: EventEmitter;
   events: any[];
   signal: (sign: string, data?: object | undefined) => void;
 
-  constructor(
-    token: string,
-    callback: (data: object) => void,
-    fields?: string[]
-  ) {
+  constructor(token: string, fields?: string[]) {
     this.token = token;
     this.fields = fields;
-    this.callback = callback;
     this.emitter = new EventEmitter();
     this.signal = signal(this.emitter);
     this.events = [

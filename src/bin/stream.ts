@@ -7,7 +7,7 @@ if (!token) throw new Error('No token provided');
 
 const callback = (data: object) => console.log(data);
 
-const tweets = new Tweets(token, callback, ['created_at']);
+const tweets = new Tweets(token, ['created_at']);
 
 tweets.emitter.on('data', obj => {
   console.log(obj);
