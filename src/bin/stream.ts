@@ -9,6 +9,9 @@ const callback = (data: object) => console.log(data);
 
 const tweets = new Tweets(token, callback, ['created_at']);
 
+tweets.emitter.on('data', obj => {
+  console.log(obj);
+});
 tweets.emitter.on('info', obj => {
   console.log(obj);
 });
@@ -16,7 +19,7 @@ tweets.emitter.on('warn', obj => {
   console.log(obj);
 });
 tweets.emitter.on('error', obj => {
-  console.log(obj);
+  throw new Error(JSON.stringify(obj));
 });
 
 tweets.stream();
