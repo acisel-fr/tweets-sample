@@ -1,8 +1,12 @@
 import { get } from 'https';
-import store from '../store';
-import type { Data, DataResponse, Options } from '../types';
+import { twitter } from '../constants/twitter';
+import { Options } from './query';
 
-export default function (options: Options, callback: (arg0: Data) => void) {
+export interface DataResponse {
+  data: object;
+}
+
+export default function (options: Options, callback: (arg0: any) => void) {
   get(options, response => {
     const status = response.statusCode;
     const rateLimit = {
@@ -13,9 +17,9 @@ export default function (options: Options, callback: (arg0: Data) => void) {
     };
     if (status === 200) {
       // Start connection
+      const heartbeat = twitter.heartbeatInterval;
       let current = 0,
-        last = 0,
-        heartbeat = store.getState().constants.heartbeatInterval;
+        last = 0;
       setInterval(() => {
         // warn if empty connection
         if (current === last) {

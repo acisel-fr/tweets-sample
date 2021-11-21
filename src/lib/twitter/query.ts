@@ -1,18 +1,26 @@
-import store from '../store';
+import { twitter } from '../constants/twitter';
 
-export default function (fields?: string[]) {
-  const hostname = store.getState().constants.hostname;
-  let path = store.getState().constants.path.stream_sample_tweets;
+export interface Options {
+  hostname: string;
+  path: string;
+  headers: any;
+}
+
+export default function (token: string, fields?: string[]): Options {
+  /** Build path with fields wanted */
+  let path = twitter.path;
   if (fields && fields.length > 0) {
     path += '?tweet.fields=' + fields.join(',');
   }
-  const bearer = store.getState().constants.bearer_token;
+
+  /** Build options of Get */
   const options = {
-    hostname: hostname,
+    hostname: twitter.hostname,
     path: path,
     headers: {
-      Authorization: `Bearer ${bearer}`,
+      Authorization: `Bearer ${token}`,
     },
   };
+
   return options;
 }
