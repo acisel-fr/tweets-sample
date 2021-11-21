@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.0.2](https://github.com/acisel-fr/tweets-sample/compare/v1.0.1...v1.0.2) (2021-11-21)
+
+
+### Bug Fixes
+
+* [#8](https://github.com/acisel-fr/tweets-sample/issues/8) ([25a5b06](https://github.com/acisel-fr/tweets-sample/commit/25a5b0639f28b9b7c10daaa0744d5aa29f73e30e))
+
+
+### Code refactoring
+
+* No need of callback ([1ecb813](https://github.com/acisel-fr/tweets-sample/commit/1ecb813a46204e295de1c4544e3a6c4a18f13ab5))
+
 ### [1.0.1](https://github.com/acisel-fr/tweets-sample/compare/v0.2.0...v1.0.1) (2021-11-21)
 
 ## [0.2.0](https://github.com/acisel-fr/tweets-sample/compare/v0.1.0...v0.2.0) (2021-11-21)
