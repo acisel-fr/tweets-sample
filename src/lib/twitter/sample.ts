@@ -1,68 +1,88 @@
 import { get } from 'https';
+import type EventEmitter from 'events';
 import { twitter } from '../constants/twitter';
 import { Options } from './query';
+import {
+  CONNECTED,
+  CONNECTING,
+  WRONG_STATUS,
+  CONN_INACTIVE,
+  RATE_LIMITS,
+  OK_STATUS,
+  CONN_END,
+  HEARTBEAT,
+  CHUNK,
+  NOT_JSON,
+  NOT_TWEET,
+  DATA,
+  CONN_ACTIVE,
+} from '../constants/signals';
+import type { IncomingMessage } from 'http';
 
-export interface DataResponse {
-  data: object;
-}
-
-export default function (options: Options, callback: (arg0: any) => void) {
+export default function (options: Options, signal: EventEmitter) {
+  signal.emit(CONNECTING);
   get(options, response => {
+    signal.emit(CONNECTED);
+    signal.emit(RATE_LIMITS, ratesSelector(response));
     const status = response.statusCode;
-    const rateLimit = {
-      status: status,
-      limit: response.headers['x-rate-limit-limit'],
-      remain: response.headers['x-rate-limit-remaining'],
-      reset: response.headers['x-rate-limit-reset'],
-    };
     if (status === 200) {
-      // Start connection
+      signal.emit(OK_STATUS);
+
+      /** Watch if connection get inactive */
       const heartbeat = twitter.heartbeatInterval;
-      let current = 0,
-        last = 0;
+      let current = 0;
+      let last = 0;
       setInterval(() => {
-        // warn if empty connection
         if (current === last) {
-          throw new Error(
-            `No data or heartbeat during ${heartbeat} ms. Ticks ${last}/${current}`
-          );
+          signal.emit(CONN_INACTIVE);
         } else {
+          signal.emit(CONN_ACTIVE);
           last = current;
         }
       }, heartbeat);
-      // Authentication and query succeed
-      response.setEncoding('utf8');
+
+      /** Data analysis */
       let data: string = '';
+      response.setEncoding('utf8');
       response.on('data', (chunk: string) => {
         ++current;
-        // Heartbeat
-        if (chunk.match(/^[\n\r]*$/)) return;
+        if (chunk.match(/^[\n\r]*$/)) return signal.emit(HEARTBEAT);
         data += chunk;
-        // Part of data only. Wait for the completion
-        if (!data.match(/[\r\n]$/)) return;
-        // Data complete
+        if (!data.match(/[\r\n]$/)) return signal.emit(CHUNK);
         try {
           // should be a JSON
           const json: DataResponse = JSON.parse(data);
           data = '';
           if (json.data) {
-            callback(json.data);
+            signal.emit(DATA, json.data);
           } else {
-            // Not an awaited type
             const type = JSON.stringify(json);
-            throw new Error(`Another type of data has been sent: ${type}`);
+            signal.emit(NOT_TWEET, type);
           }
         } catch (error) {
-          // Not a JSON format
           const format = JSON.stringify(data);
-          throw new Error(`Bad format: |${format}|`);
+          signal.emit(NOT_JSON, format);
         }
       });
+
       response.on('end', () => {
-        throw new Error('End of the stream');
+        signal.emit(CONN_END);
       });
     } else {
-      throw new Error(`Status error: ${status}`);
+      signal.emit(WRONG_STATUS, status, response);
     }
   });
+}
+
+function ratesSelector(res: IncomingMessage) {
+  const head = res.headers;
+  return {
+    limit: head['x-rate-limit-limit'],
+    remain: head['x-rate-limit-remaining'],
+    reset: head['x-rate-limit-reset'],
+  };
+}
+
+export interface DataResponse {
+  data: object;
 }
