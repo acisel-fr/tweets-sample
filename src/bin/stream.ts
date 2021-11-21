@@ -5,8 +5,6 @@ config();
 const token = process.env.TWITTER_BEARER_TOKEN;
 if (!token) throw new Error('No token provided');
 
-const callback = (data: object) => console.log(data);
-
 const tweets = new Tweets(token, ['created_at']);
 
 tweets.emitter.on('data', obj => {
