@@ -1,7 +1,7 @@
 {
   "upload_type": "software",
-  "title": "tweets-sample",
-  "description": "Pull 1 over 100 tweets in real time",
+  "title": "tweets-sample: A module to pull 1% tweets in real time",
+  "description": "",
   "creators": [
     {
       "orcid": "0000-0002-0177-0387",
