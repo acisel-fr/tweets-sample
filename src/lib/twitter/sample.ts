@@ -4,11 +4,6 @@ import { Options } from './query';
 import type { IncomingMessage } from 'http';
 import { DateTime } from 'luxon';
 import {
-  OFFLINE,
-  NO_TWITTER_SERVER,
-  OAUTH_SUCCESS,
-  OAUTH_FAIL,
-  NO_TWITTER_TOKEN,
   CONNECTING,
   WRONG_STATUS,
   TIMEOUT,

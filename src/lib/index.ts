@@ -1,8 +1,9 @@
 import sample from './twitter/sample';
 import query from './twitter/query';
 import EventEmitter from 'events';
-import { NO_TWITTER_TOKEN } from './signal/events';
+import { NO_TWITTER_TOKEN, OFFLINE, ONLINE } from './signal/events';
 import buildSignal from './signal';
+import online from './network/online';
 export default class {
   emitter: EventEmitter;
   signal: (sign: string, data?: object | undefined) => void;
@@ -26,10 +27,12 @@ export default class {
     this.timeOut = timeOut || 10000;
   }
 
-  stream() {
-    if (!this.token) return this.signal(NO_TWITTER_TOKEN);
-    const options = query(this.token, this.fields);
+  async stream() {
     const signal = this.signal;
+    if (!(await online())) return signal(OFFLINE);
+    signal(ONLINE);
+    if (!this.token) return signal(NO_TWITTER_TOKEN);
+    const options = query(this.token, this.fields);
     const timeOut = this.timeOut;
     sample({ signal, timeOut, options });
   }

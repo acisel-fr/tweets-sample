@@ -1,8 +1,10 @@
 import type { EventEmitter } from 'stream';
 import { DateTime } from 'luxon';
 import {
+  ONLINE,
   OFFLINE,
-  NO_TWITTER_SERVER,
+  TWITTER_API_ONLINE,
+  TWITTER_API_OFFLINE,
   OAUTH_SUCCESS,
   OAUTH_FAIL,
   NO_TWITTER_TOKEN,
@@ -28,6 +30,11 @@ export type Signal = (sign: string, data?: object) => void;
 export default function (emitter: EventEmitter) {
   const signal = (sign: string, data?: object): void => {
     const date = DateTime.now().toISO();
+    if (sign === OFFLINE)
+      emitter.emit('info', { event: OFFLINE, receivedAt: date });
+    if (sign === ONLINE)
+      emitter.emit('info', { event: ONLINE, receivedAt: date });
+
     if (sign === NO_TWITTER_TOKEN)
       emitter.emit('error', { event: NO_TWITTER_TOKEN, receivedAt: date });
 
