@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com/acisel-fr/tweets-sample/compare/v2.0.1...v2.1.0) (2021-11-23)
+
+
+### Features
+
+* [#13](https://github.com/acisel-fr/tweets-sample/issues/13) online ([f999727](https://github.com/acisel-fr/tweets-sample/commit/f999727f4ecfc3197eb21f7348d25886415f40ee))
+* [#14](https://github.com/acisel-fr/tweets-sample/issues/14) ping twitter ([3394168](https://github.com/acisel-fr/tweets-sample/commit/33941686e5e46bd86e98f4ab8d6ad72850b48dc1))
+
+
+### Bug Fixes
+
+* [#16](https://github.com/acisel-fr/tweets-sample/issues/16) Events list ([ca3527f](https://github.com/acisel-fr/tweets-sample/commit/ca3527fa86abace027b97e720153867a9f24a7bc))
+
 ### [2.0.1](https://github.com/acisel-fr/tweets-sample/compare/v2.0.0...v2.0.1) (2021-11-23)
 
 
