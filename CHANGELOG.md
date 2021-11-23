@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.1.1](https://github.com/acisel-fr/tweets-sample/compare/v2.1.0...v2.1.1) (2021-11-23)
+
+
+### Bug Fixes
+
+* [#18](https://github.com/acisel-fr/tweets-sample/issues/18) zenodo description ([6a1a48c](https://github.com/acisel-fr/tweets-sample/commit/6a1a48c90983f121a135c489d15362c9263a6594))
+
 ## [2.1.0](https://github.com/acisel-fr/tweets-sample/compare/v2.0.1...v2.1.0) (2021-11-23)
 
 
