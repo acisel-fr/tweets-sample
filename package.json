@@ -1,5 +1,5 @@
 {
-  "name": "@acisel-fr/tweets-sample",
+  "name": "@acisel.fr/tweets-sample",
   "version": "1.0.2",
   "description": "Pull 1 over 100 tweets in real time",
   "repository": {
@@ -19,9 +19,9 @@
   "main": "./dist/lib/index.js",
   "types": "./dist/lib/index.d.ts",
   "scripts": {
-    "build": "run-p ts2js ts2min",
-    "ts2js": "tsc",
-    "ts2min": "rollup --config",
+    "build": "tsc",
+    "launch": "node dist/bin/sample.js",
+    "start": "run-s build launch",
     "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
     "pack": "npm pack",
