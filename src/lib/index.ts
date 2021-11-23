@@ -1,54 +1,36 @@
-import tweets from './twitter/sample';
+import sample from './twitter/sample';
 import query from './twitter/query';
 import EventEmitter from 'events';
-import {
-  CONNECTED,
-  CONNECTING,
-  WRONG_STATUS,
-  CONN_INACTIVE,
-  RATE_LIMITS,
-  CONN_END,
-  HEARTBEAT,
-  CHUNK,
-  NOT_JSON,
-  NOT_TWEET,
-  DATA,
-  OK_STATUS,
-  CONN_ACTIVE,
-  signal,
-} from './constants/signals';
+import { NO_TWITTER_TOKEN } from './constants/events';
+import { buildSignal } from './constants/signal';
 export default class {
-  token: string;
-  fields: string[] | undefined;
   emitter: EventEmitter;
-  events: any[];
   signal: (sign: string, data?: object | undefined) => void;
+  token: string | undefined;
+  fields: string[] | undefined;
+  timeOut: number;
 
-  constructor(token: string, fields?: string[]) {
+  constructor({
+    token,
+    fields,
+    timeOut,
+  }: {
+    token: string | undefined;
+    fields?: string[];
+    timeOut?: number;
+  }) {
+    this.emitter = new EventEmitter();
+    this.signal = buildSignal(this.emitter);
     this.token = token;
     this.fields = fields;
-    this.emitter = new EventEmitter();
-    this.signal = signal(this.emitter);
-    this.events = [
-      CONNECTED,
-      CONNECTING,
-      WRONG_STATUS,
-      CONN_INACTIVE,
-      RATE_LIMITS,
-      CONN_END,
-      HEARTBEAT,
-      CHUNK,
-      NOT_JSON,
-      NOT_TWEET,
-      DATA,
-      OK_STATUS,
-      CONN_ACTIVE,
-    ];
+    this.timeOut = timeOut || 10000;
   }
 
   stream() {
+    if (!this.token) return this.signal(NO_TWITTER_TOKEN);
     const options = query(this.token, this.fields);
-
-    tweets(options, this.signal);
+    const signal = this.signal;
+    const timeOut = this.timeOut;
+    sample({ signal, timeOut, options });
   }
 }

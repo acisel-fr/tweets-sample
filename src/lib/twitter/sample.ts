@@ -1,32 +1,48 @@
 import { get } from 'https';
 import { twitter } from '../constants/twitter';
 import { Options } from './query';
-import {
-  CONNECTED,
-  CONNECTING,
-  WRONG_STATUS,
-  CONN_INACTIVE,
-  RATE_LIMITS,
-  OK_STATUS,
-  CONN_END,
-  HEARTBEAT,
-  CHUNK,
-  NOT_JSON,
-  NOT_TWEET,
-  DATA,
-  CONN_ACTIVE,
-} from '../constants/signals';
 import type { IncomingMessage } from 'http';
 import { DateTime } from 'luxon';
+import {
+  OFFLINE,
+  NO_TWITTER_SERVER,
+  OAUTH_SUCCESS,
+  OAUTH_FAIL,
+  NO_TWITTER_TOKEN,
+  TIMEOUT,
+  CONNECTING,
+  WRONG_STATUS,
+  OK_STATUS,
+  RATE_LIMITS,
+  CONNECTED,
+  HEARTBEAT,
+  CHUNK,
+  TWEET,
+  NOT_JSON,
+  NOT_TWEET,
+  CONN_INACTIVE,
+  CONN_ACTIVE,
+  CONN_END,
+} from '../constants/events';
+import { Signal } from '../constants/signal';
 
-export default function (
-  options: Options,
-  signal: (sign: string, data?: any) => void
-) {
+interface Sample {
+  signal: Signal;
+  timeOut: number;
+  options: Options;
+}
+
+export default function ({ signal, timeOut, options }: Sample) {
   signal(CONNECTING);
+  const clear = setTimeout(() => {
+    signal(TIMEOUT);
+  }, timeOut);
+
   get(options, response => {
+    clearTimeout(clear);
     signal(CONNECTED);
     signal(RATE_LIMITS, ratesSelector(response));
+
     const status = response.statusCode;
     if (status === 200) {
       signal(OK_STATUS);
@@ -57,14 +73,13 @@ export default function (
           const json: DataResponse = JSON.parse(data);
           data = '';
           if (json.data) {
-            signal(DATA, json.data);
+            signal(TWEET, json.data);
           } else {
-            const type = JSON.stringify(json);
-            signal(NOT_TWEET, type);
+            signal(NOT_TWEET, json);
           }
         } catch (error) {
           const format = JSON.stringify(data);
-          signal(NOT_JSON, format);
+          signal(NOT_JSON, { chunk: format });
         }
       });
 
@@ -87,7 +102,6 @@ function ratesSelector(res: IncomingMessage) {
     reset: date,
   };
 }
-
 export interface DataResponse {
   data: object;
 }
