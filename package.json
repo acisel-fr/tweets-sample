@@ -11,7 +11,7 @@
   },
   "homepage": "https://github.com/acisel-fr/tweets-sample#readme",
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
+    "registry": "https://registry.npmjs.org/"
   },
   "bin": {
     "stream": "./dist/bin/stream.js"
