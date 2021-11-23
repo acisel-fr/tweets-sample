@@ -1,7 +1,7 @@
 {
   "upload_type": "software",
-  "title": "tweets-sample: A module to pull 1% tweets in real time",
-  "description": "",
+  "title": "tweets-sample: A module to emit a sample of 1% of all tweets in real time",
+  "description": "Emit a sample of all tweets in real time",
   "creators": [
     {
       "orcid": "0000-0002-0177-0387",
