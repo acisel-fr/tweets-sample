@@ -31,9 +31,14 @@ export default function (emitter: EventEmitter) {
   const signal = (sign: string, data?: object): void => {
     const date = DateTime.now().toISO();
     if (sign === OFFLINE)
-      emitter.emit('info', { event: OFFLINE, receivedAt: date });
+      emitter.emit('error', { event: OFFLINE, receivedAt: date });
     if (sign === ONLINE)
       emitter.emit('info', { event: ONLINE, receivedAt: date });
+
+    if (sign === TWITTER_API_OFFLINE)
+      emitter.emit('error', { event: TWITTER_API_OFFLINE, receivedAt: date });
+    if (sign === TWITTER_API_ONLINE)
+      emitter.emit('info', { event: TWITTER_API_ONLINE, receivedAt: date });
 
     if (sign === NO_TWITTER_TOKEN)
       emitter.emit('error', { event: NO_TWITTER_TOKEN, receivedAt: date });

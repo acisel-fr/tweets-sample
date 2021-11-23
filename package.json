@@ -47,7 +47,8 @@
   "dependencies": {
     "dotenv": "^10.0.0",
     "is-online": "^9.0.1",
-    "luxon": "^2.1.1"
+    "luxon": "^2.1.1",
+    "ping": "^0.4.1"
   },
   "prettier": {
     "tabWidth": 2,
