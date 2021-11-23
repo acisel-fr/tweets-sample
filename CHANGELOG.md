@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/acisel-fr/tweets-sample/compare/v1.0.2...v2.0.0) (2021-11-23)
+
+
+### ⚠ BREAKING CHANGES
+
+* #10 #11 Destructuring parameters
+* #9 NPM registry
+
+### Bug Fixes
+
+* [#10](https://github.com/acisel-fr/tweets-sample/issues/10) [#11](https://github.com/acisel-fr/tweets-sample/issues/11) Destructuring parameters ([c7066cf](https://github.com/acisel-fr/tweets-sample/commit/c7066cf53ebcd1bdb3b8f7389b0cb4c7be5b0781))
+* [#9](https://github.com/acisel-fr/tweets-sample/issues/9) NPM registry ([133931f](https://github.com/acisel-fr/tweets-sample/commit/133931fb6b39c4ec969e9daea79fd1bf8d7b68e9))
+
+
+### Documentation
+
+* Fix title ([a98b961](https://github.com/acisel-fr/tweets-sample/commit/a98b9619c3bc38fb34a96016c82a9c81a1df0a78))
+
+
+### Code refactoring
+
+* [#12](https://github.com/acisel-fr/tweets-sample/issues/12) ([ba26d9e](https://github.com/acisel-fr/tweets-sample/commit/ba26d9e0c39e033ff6948cb61b048035f0d3cde8))
+
 ### [1.0.2](https://github.com/acisel-fr/tweets-sample/compare/v1.0.1...v1.0.2) (2021-11-21)
 
 
