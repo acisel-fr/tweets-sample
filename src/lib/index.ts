@@ -1,8 +1,8 @@
 import sample from './twitter/sample';
 import query from './twitter/query';
 import EventEmitter from 'events';
-import { NO_TWITTER_TOKEN } from './constants/events';
-import { buildSignal } from './constants/signal';
+import { NO_TWITTER_TOKEN } from './signal/events';
+import buildSignal from './signal';
 export default class {
   emitter: EventEmitter;
   signal: (sign: string, data?: object | undefined) => void;

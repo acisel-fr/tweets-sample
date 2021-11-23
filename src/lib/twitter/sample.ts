@@ -1,5 +1,5 @@
 import { get } from 'https';
-import { twitter } from '../constants/twitter';
+import { url } from './url';
 import { Options } from './query';
 import type { IncomingMessage } from 'http';
 import { DateTime } from 'luxon';
@@ -8,7 +8,6 @@ import {
   NO_TWITTER_SERVER,
   OAUTH_SUCCESS,
   OAUTH_FAIL,
-  NO_TWITTER_TOKEN,
   TIMEOUT,
   CONNECTING,
   WRONG_STATUS,
@@ -23,8 +22,8 @@ import {
   CONN_INACTIVE,
   CONN_ACTIVE,
   CONN_END,
-} from '../constants/events';
-import { Signal } from '../constants/signal';
+} from '../signal/events';
+import { Signal } from '../signal';
 
 interface Sample {
   signal: Signal;
@@ -48,7 +47,7 @@ export default function ({ signal, timeOut, options }: Sample) {
       signal(OK_STATUS);
 
       /** Watch if connection get inactive */
-      const heartbeat = twitter.heartbeatInterval;
+      const heartbeat = url.heartbeatInterval;
       let current = 0;
       let last = 0;
       setInterval(() => {

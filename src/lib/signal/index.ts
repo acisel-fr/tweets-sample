@@ -23,7 +23,8 @@ import {
 
 export type Signal = (sign: string, data?: object) => void;
 
-export function buildSignal(emitter: EventEmitter) {
+/** Build a function */
+export default function (emitter: EventEmitter) {
   const signal = (sign: string, data?: object): void => {
     const date = DateTime.now().toISO();
     if (sign === NO_TWITTER_TOKEN)
