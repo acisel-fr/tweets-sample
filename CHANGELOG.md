@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.0.1](https://github.com/acisel-fr/tweets-sample/compare/v2.0.0...v2.0.1) (2021-11-23)
+
+
+### Bug Fixes
+
+* npm publish ([776f252](https://github.com/acisel-fr/tweets-sample/commit/776f2525222890bf536176ebc193f9fe2e0143ae))
+
 ## [2.0.0](https://github.com/acisel-fr/tweets-sample/compare/v1.0.2...v2.0.0) (2021-11-23)
 
 
