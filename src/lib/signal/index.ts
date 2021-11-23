@@ -2,6 +2,7 @@ import type { EventEmitter } from 'stream';
 import { DateTime } from 'luxon';
 import {
   OFFLINE,
+  NO_TWITTER_SERVER,
   OAUTH_SUCCESS,
   OAUTH_FAIL,
   NO_TWITTER_TOKEN,
