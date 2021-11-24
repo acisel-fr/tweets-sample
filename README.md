@@ -54,3 +54,7 @@ You will see then 1% of all the tweets emitted in real time.
 - [ ] i18n
 - [ ] a11y
 - [ ] perf
+
+## Contributeurs
+
+[![](https://opencollective.com/acisel/contributors.svg?width=890&button=false)](https://github.com/acisel-fr/tweets-sample/graphs/contributors)
