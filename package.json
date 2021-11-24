@@ -1,7 +1,27 @@
 {
-  "name": "@acisel.fr/tweets-sample",
+  "name": "@acisel-fr/tweets-sample",
   "version": "2.1.1",
   "description": "Pull 1 over 100 tweets in real time",
+  "homepage": "https://tweets-sample.acisel.fr",
+  "engines": {
+    "node": ">=16.13.0"
+  },
+  "main": "./dist/lib/index.js",
+  "types": "./dist/lib/index.d.ts",
+  "bin": {
+    "stream": "./dist/bin/stream.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "launch": "node dist/bin/sample.js",
+    "start": "run-s build launch",
+    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+    "release": "standard-version",
+    "publish": "run-s build publish-github publish-npm",
+    "publish-github": "npm publish",
+    "publish-npm": "npm publish --access=public --scope=@acisel.fr --registry=https://registry.npmjs.org/"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/acisel-fr/tweets-sample.git"
@@ -9,27 +29,8 @@
   "bugs": {
     "url": "https://github.com/acisel-fr/tweets-sample/issues"
   },
-  "homepage": "https://github.com/acisel-fr/tweets-sample#readme",
   "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
-  },
-  "bin": {
-    "stream": "./dist/bin/stream.js"
-  },
-  "main": "./dist/lib/index.js",
-  "types": "./dist/lib/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "launch": "node dist/bin/sample.js",
-    "start": "run-s build launch",
-    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
-    "pack": "npm pack",
-    "package": "run-s build pack",
-    "release": "standard-version"
-  },
-  "engines": {
-    "node": ">=16.13.0"
+    "registry": "https://npm.pkg.github.com/"
   },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
